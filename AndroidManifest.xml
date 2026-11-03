@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="local.homelab.helper">
+
+    <!-- No permissions at all: the app only plays sounds that ship inside it. -->
+
+    <application
+        android:label="Homelab Helper"
+        android:allowBackup="false"
+        android:theme="@android:style/Theme.DeviceDefault.DayNight">
+
+        <activity android:name=".MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Home Assistant's app sends: command_broadcast_intent,
+             intent_package_name local.homelab.helper, intent_action local.homelab.helper.CHIME,
+             intent_extras sound:chores_done -->
+        <receiver android:name=".ChimeReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="local.homelab.helper.CHIME" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
